@@ -1,0 +1,56 @@
+#	This program is free software; you can redistribute it and/or modify
+#       it under the terms of the GNU General Public License as published by
+#       the Free Software Foundation; either version 2 of the License, or
+#       (at your option) any later version.
+#       
+#       This program is distributed in the hope that it will be useful,
+#       but WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#       GNU General Public License for more details.
+#       
+#       You should have received a copy of the GNU General Public License
+#       along with this program; if not, write to the Free Software
+#       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#       MA 02110-1301, USA.
+
+# Creators / Devs : naudit007 AT gmail DOT com & linuxmasterjedi AT free DOT fr
+# Any problem : do not hesitate to contact us via email
+
+######################
+# Requirement 
+
+	- You must have an HP based server (tested on DL, ML, BL or GL 360, 380, 560, 580...)
+	- Install the command 'hpacucli' provided on the HP website
+	- sudo installed
+	- A Hobbit Client running ;)
+		  
+
+
+######################
+# Installation 
+
+	1/ Put script 'hphwraid.sh' in client hobbit '${BBHOME}/ext/'
+
+	2/ Edit your client configutation file '/etc/clientlaunch.cfg' and add :
+ 	 
+	    [hpraid]
+               ENVFILE $HOBBITCLIENTHOME/etc/hobbitclient.cfg
+               CMD $HOBBITCLIENTHOME/ext/hphwraid.sh
+               LOGFILE $HOBBITCLIENTHOME/logs/hphwraid.log
+               INTERVAL 5m  
+ 
+	3/ Provide privileges at the hobbit user to run the hpaucli command via "sudo"
+	    
+	    root# visudo	
+	        Add this at the end of the file 
+		  hobbit ALL= NOPASSWD: /usr/sbin/hpacucli
+		and comment this : 
+		  #Default requiretty
+
+
+	4/ On server, edit your '${BBHOME}/etc/bb-hosts' and add the keyword 'hpraid' on host you want to monitor
+            0.0.0.0  hostname_HP   # conn ssh hpraid    NAME:"My Server HP1" CLIENT:hostame_HP.my.domain
+     
+  	5/ Et voila; the 'HPRAID' column should appear in less then 5min.
+
+Enjoy ;)
