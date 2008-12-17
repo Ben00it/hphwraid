@@ -14,7 +14,7 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 #
-# This sript test redundancy raid hardware on hobbit 
+# This sript test redundancy raid hardware on XYmon/Hobbit 
 
 
   ###################################
@@ -77,7 +77,7 @@
     while read LINE; do 
       set $LINE
       echo $LINE >> ${LOGFILES}
-      CheckTheResult `echo ${LINE} | awk '{print $8}'`
+      CheckTheResult `echo ${LINE} | awk '{ print $NF }'`
     done < <(${HPACMDPHY} | sed -e '/^$/d')
 
     # Launch the raid physical hardware test
@@ -86,7 +86,7 @@
     while read LINE; do
       set $LINE
       echo $LINE >> ${LOGFILES}
-      CheckTheResult `echo ${LINE} | awk '{print $8}'` 
+      CheckTheResult `echo ${LINE} | awk '{ print $NF }'` 
     done < <(${HPACMDLOG} | sed -e '/^$/d')
   done < <(${HPACMDSLOT} | awk '{print $6}' | sed -e '/^$/d')
 

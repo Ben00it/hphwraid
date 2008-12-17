@@ -22,14 +22,14 @@
 	- You must have an HP based server (tested on DL, ML, BL or GL 360, 380, 560, 580...)
 	- Install the command 'hpacucli' provided on the HP website
 	- sudo installed
-	- A Hobbit Client running ;)
+	- A XYmon/Hobbit Client running ;)
 		  
 
 
 ######################
 # Installation 
 
-	1/ Put script 'hphwraid.sh' in client hobbit '${BBHOME}/ext/'
+	1/ Put script 'hphwraid.sh' in XYmon/Hobbit extention client directory '${BBHOME}/ext/'
 
 	2/ Edit your client configutation file '/etc/clientlaunch.cfg' and add :
  	 
@@ -37,7 +37,7 @@
                ENVFILE $HOBBITCLIENTHOME/etc/hobbitclient.cfg
                CMD $HOBBITCLIENTHOME/ext/hphwraid.sh
                LOGFILE $HOBBITCLIENTHOME/logs/hphwraid.log
-               INTERVAL 5m  
+               INTERVAL 20m  
  
 	3/ Provide privileges at the hobbit user to run the hpaucli command via "sudo"
 	    
