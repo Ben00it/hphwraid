@@ -14,14 +14,15 @@
 #       MA 02110-1301, USA.
 
 # Creators / Devs : naudit007 AT gmail DOT com & linuxmasterjedi AT free DOT fr
-# Any problem : do not hesitate to contact us via email
+# Any problem : do not hesitate to contact us by email
+
 
 ######################
 # Requirement 
 
 	- You must have an HP based server (tested on DL, ML, BL or GL 360, 380, 560, 580...)
 	- Install the command 'hpacucli' provided on the HP website
-	- sudo installed
+	- 'sudo' installed
 	- A XYmon/Hobbit Client running ;)
 		  
 
@@ -29,9 +30,9 @@
 ######################
 # Installation 
 
-	1/ Put script 'hphwraid.sh' in XYmon/Hobbit extention client directory '${BBHOME}/ext/'
+	1/ Put the 'hphwraid.sh' script in your XYmon/Hobbit extention client directory '${BBHOME}/ext/'
 
-	2/ Edit your client configutation file '/etc/clientlaunch.cfg' and add :
+	2/ Edit your client configutation file 'etc/clientlaunch.cfg' and add :
  	 
 	    [hpraid]
                ENVFILE $HOBBITCLIENTHOME/etc/hobbitclient.cfg
@@ -39,11 +40,12 @@
                LOGFILE $HOBBITCLIENTHOME/logs/hphwraid.log
                INTERVAL 20m  
  
-	3/ Provide privileges at the hobbit user to run the hpaucli command via "sudo"
+	3/ Provide privileges at the hobbit user to run the hpacucli command using "sudo"
 	    
 	    root# visudo	
 	        Add this at the end of the file 
 		  hobbit ALL= NOPASSWD: /usr/sbin/hpacucli
+		
 		and comment this : 
 		  #Default requiretty
 
@@ -51,6 +53,6 @@
 	4/ On server, edit your '${BBHOME}/etc/bb-hosts' and add the keyword 'hpraid' on host you want to monitor
             0.0.0.0  hostname_HP   # conn ssh hpraid    NAME:"My Server HP1" CLIENT:hostame_HP.my.domain
      
-  	5/ Et voila; the 'HPRAID' column should appear in less then 5min.
+  	5/ Et voila; the 'HPRAID' column should appear under 5min.
 
 Enjoy ;)
