@@ -14,7 +14,7 @@
 #       Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #       MA 02110-1301, USA.
 #
-# This sript test redundancy raid hardware on XYmon/Hobbit 
+# This script test HP hardware raid status for XYmon/Hobbit monitoring tool
 
 
   ###################################
@@ -31,7 +31,7 @@
   ###################################
   # Pre-Run tests
   # Is hpacucli is around ?
-  if [ ! -e ${PATHTOHPACMD} ]; then
+  if [ ! -e "${PATHTOHPACMD}" ]; then
       echo -e "\n\r\t/!\ hpacucli binary is not present on your system. It should be in ${PATHTOHPACMD}.\n\r"
       exit 1
   fi
@@ -40,7 +40,7 @@
   # Functions
   #
   function CheckTheResult {
-    if [ ${1} = "OK" ]; then
+    if [ "${1}" = "OK" ]; then
         COLOR="green"
     else
         COLOR="red"
@@ -49,9 +49,9 @@
   }
   function SendResult {
     COLOR=${FINALCOLOR}
-    MSG=`cat ${LOGFILES}`
+    MSG=$(cat ${LOGFILES})
     # I sent back the result to the Hobbit Server
-    $BB $BBDISP "status ${MACHINE}.${COLUMN} ${COLOR} `date`
+    $BB $BBDISP "status ${MACHINE}.${COLUMN} ${COLOR} $(date)
 
     ${MSG}
     "
@@ -71,22 +71,22 @@
 
     # Reset of log file
     cat /dev/null > ${LOGFILES}
-    echo "<br /><u>Hardware view on SLOT ${SLOT}</u>" >> ${LOGFILES}
+    echo "<br /><u>Hardware overview on SLOT ${SLOT}:</u>" >> ${LOGFILES}
  
     # Launch the raid physical hardware test
     while read LINE; do 
       set $LINE
       echo $LINE >> ${LOGFILES}
-      CheckTheResult `echo ${LINE} | awk '{ print $NF }'`
+      CheckTheResult $(echo ${LINE} | awk '{ print $NF }')
     done < <(${HPACMDPHY} | sed -e '/^$/d')
 
     # Launch the raid physical hardware test
     echo " " >> ${LOGFILES}
-    echo "<u>View from the OS:</u>" >> ${LOGFILES}
+    echo "<u>OS overview:</u>" >> ${LOGFILES}
     while read LINE; do
       set $LINE
       echo $LINE >> ${LOGFILES}
-      CheckTheResult `echo ${LINE} | awk '{ print $NF }'` 
+      CheckTheResult $(echo ${LINE} | awk '{ print $NF }')
     done < <(${HPACMDLOG} | sed -e '/^$/d')
   done < <(${HPACMDSLOT} | awk '{print $6}' | sed -e '/^$/d')
 
