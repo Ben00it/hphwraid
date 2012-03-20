@@ -40,7 +40,7 @@
   # Functions
   #
   function CheckTheResult {
-    if [ "${1}" = "OK" ]; then
+    if [ "${1}" = "OK" -o "${1}" = "Ok" ]; then
         COLOR="green"
     else
         COLOR="red"
